@@ -3,20 +3,21 @@
 rows = 2;
 cols = 2;
 
-cell = 50.5;             // cell size (mm)
-wall = 2;              // wall thickness between/around cells (mm)
-height = 3;            // total wall height (mm)
-underlay_thick = 0.6;  // thickness of material under walls only (mm)
-gap = 0.2;             // clearance per side inside each cell (tune for fit)
+cell = 50.5;            // cell size (mm)
+wall = 1;               // interior wall thickness between cells (mm)
+ext_wall_pct = 0.5;     // exterior wall percent compared to interior wall
+height = 4;             // total wall height (mm)
+underlay_thick = 0.6;   // thickness of material under walls only (mm)
+gap = 0.2;              // clearance per side inside each cell (tune for fit)
 
 // Shelf parameters (tile support ledge inside each cell)
-shelf_height = 2.0;    // distance below top surface where shelf sits (mm)
+shelf_height = 3.0;    // distance below top surface where shelf sits (mm)
 shelf_width  = 1.0;    // radial width of shelf from wall inward (mm)
 shelf_thick  = 1.6;    // thickness of the shelf rib (mm)
 
 // Derived dimensions
-plate_w = cols*cell + (cols+1)*wall;  // outer width
-plate_d = rows*cell + (rows+1)*wall;  // outer depth
+plate_w = cols*cell + (cols+1)*wall-(wall*ext_wall_pct);  // outer width
+plate_d = rows*cell + (rows+1)*wall-(wall*ext_wall_pct);  // outer depth
 inner_cell = cell - 2*gap;            // interior opening after gap
 
 module baseplate() {
